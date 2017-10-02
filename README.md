@@ -17,9 +17,15 @@ Command line utility to launch Express local API for claudia-api-builder. Test d
 npm install --save-dev claudia-local-api
 ````
 
+To install globally:
+
+````
+npm install -g claudia-local-api
+````
+
 ## Usage
 
-If you have a `claudia` server ready for deployment and you want to test it locally:
+If you have a [`claudia`](https://www.npmjs.com/package/claudia) and [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app/server named `lib/app.js` ready for deployment and you want to test it locally:
 
 ````js
 'use strict';
@@ -50,14 +56,24 @@ function bootstrap() {
 module.exports = bootstrap();
 ````
 
-You can install `claudia-local-api` and run the command line Express API to test out the lambda function locally:
+You can install `claudia-local-api`  and run the command line Express API to test out the lambda function locally:
 
 ````
-node_modules/.bin/claudia-local-api --api-module lib/app.js
+claudia-local-api --app-module lib/app.js
 ````
 
 Or add into your `package.json`:
 
 ````json
 "server": "claudia-local-api --api-module lib/app.js"
+````
+
+This will start up a local Express server on port 3000 to proxy requests to your [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app.
+
+---
+
+For full list of options:
+
+````
+claudia-local-api --help
 ````
