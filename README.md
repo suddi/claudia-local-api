@@ -1,5 +1,12 @@
 # claudia-local-api
 
+[![CircleCI](https://img.shields.io/circleci/project/suddi/claudia-local-api.svg)](https://circleci.com/gh/suddi/claudia-local-api)
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://github.com/suddi/claudia-local-api)
+[![npm](https://img.shields.io/npm/dt/express.svg)](https://github.com/suddi/claudia-local-api)
+[![David](https://img.shields.io/david/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api)
+[![David](https://img.shields.io/david/dev/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api?type=dev)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/suddi/claudia-local-api)
+
 Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment
 
 ````
