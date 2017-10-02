@@ -44,3 +44,9 @@ You can install `claudia-local-api` and run the command line Express API to test
 ````
 node_modules/.bin/claudia-local-api --api-module lib/app.js
 ````
+
+Or add into your `package.json`:
+
+````json
+"server": "claudia-local-api --api-module lib/app.js"
+````
