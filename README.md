@@ -1,11 +1,15 @@
 # claudia-local-api
 
 [![CircleCI](https://img.shields.io/circleci/project/suddi/claudia-local-api.svg)](https://circleci.com/gh/suddi/claudia-local-api)
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://github.com/suddi/claudia-local-api)
-[![npm](https://img.shields.io/npm/dt/express.svg)](https://github.com/suddi/claudia-local-api)
+[![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graph/badge.svg)](https://codecov.io/gh/suddi/claudia-local-api)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4aaafdcb86574c709f856f2e00d3a809)](https://www.codacy.com/app/Suddi/claudia-local-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=suddi/claudia-local-api&amp;utm_campaign=Badge_Grade)
+[![npm](https://img.shields.io/npm/v/claudia-local-api.svg)](https://github.com/suddi/claudia-local-api)
+[![npm](https://img.shields.io/npm/dt/claudia-local-api.svg)](https://github.com/suddi/claudia-local-api)
 [![David](https://img.shields.io/david/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api)
 [![David](https://img.shields.io/david/dev/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api?type=dev)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/suddi/claudia-local-api)
+
+[![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graphs/commits.svg)](https://codecov.io/gh/suddi/claudia-local-api)
 
 Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment
 
