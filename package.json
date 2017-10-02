@@ -1,0 +1,73 @@
+{
+  "name": "claudia-local-api",
+  "description": "Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment",
+  "version": "1.0.0",
+  "homepage": "https://github.com/suddi/claudia-local-api",
+  "author": {
+    "name": "Sudharshan Ravindran",
+    "email": "mail@suddi.io",
+    "url": "https://suddi.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suddi/claudia-local-api"
+  },
+  "bugs": {
+    "url": "https://github.com/suddi/claudia-local-api/issues"
+  },
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index.js",
+  "license": "MIT",
+  "keywords": [
+    "claudia",
+    "lambda",
+    "claudia-api-builder",
+    "claudia-local",
+    "claudia-dev",
+    "lambda-local",
+    "lambda-dev",
+    "local-server",
+    "dev-server",
+    "local-api",
+    "dev-api"
+  ],
+  "engines": {
+    "node": ">= 4.0.0",
+    "npm": ">= 2.0.0"
+  },
+  "bin": {
+    "claudia-local-api": "bin/claudia-local-api"
+  },
+  "scripts": {
+    "check-coverage": "istanbul check-coverage",
+    "coverage": "istanbul cover _mocha -- --opts test/options/default.opts",
+    "lint": "eslint .",
+    "prepush": "npm test",
+    "security-check": "nsp check --output summary",
+    "test": "npm run lint && npm run security-check && npm run coverage && npm run check-coverage"
+  },
+  "dependencies": {
+    "body-parser": "^1.0.0",
+    "bunyan": "^1.0.0",
+    "commander": "^2.0.0",
+    "express": "^4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.0.0",
+    "claudia-api-builder": "^2.0.0",
+    "eslint": "^4.0.0",
+    "eslint-config-suddi": "^4.0.0",
+    "husky": "^0.14.0",
+    "istanbul": "^0.4.0",
+    "mocha": "^3.0.0",
+    "nsp": "^2.0.0",
+    "request": "^2.0.0",
+    "rewire": "^2.0 .0",
+    "sinon": "^4.0.0"
+  },
+  "eslintConfig": {
+    "extends": "suddi/backend"
+  }
+}

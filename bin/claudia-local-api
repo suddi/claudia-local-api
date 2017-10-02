@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const path = require('path');
+
+function execute() {
+    const potentialPaths = [
+        path.join(process.cwd(), 'node_modules/claudia-local-api/lib'),
+        path.join(__dirname, '../lib')
+    ];
+
+    const existingPaths = potentialPaths.filter(function (potentialPath) {
+        return fs.existsSync(potentialPath);
+    });
+
+    if (!existingPaths.length) {
+        throw new Error('claudia-local-api not found, is it installed correctly?');
+    }
+
+    const program = require(existingPaths[0]);
+    program.run();
+}
+
+execute();
