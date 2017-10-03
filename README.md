@@ -1,5 +1,7 @@
 # claudia-local-api
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/suddi/claudia-local-api.svg)](https://greenkeeper.io/)
+
 [![CircleCI](https://img.shields.io/circleci/project/suddi/claudia-local-api.svg)](https://circleci.com/gh/suddi/claudia-local-api)
 [![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graph/badge.svg)](https://codecov.io/gh/suddi/claudia-local-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/4aaafdcb86574c709f856f2e00d3a809)](https://www.codacy.com/app/Suddi/claudia-local-api)
