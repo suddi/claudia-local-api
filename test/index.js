@@ -272,13 +272,13 @@ describe('Unit tests for lib/index', function () {
     context('Testing runCmd', function () {
         it('CASE 1: Should be able to process command line arguments', function () {
             const runCmd = localApi.__get__('runCmd');
-            const appModule = 'test/claudia_app';
+            const apiModule = 'test/claudia_app';
             const port = 3001;
             process.argv = [
                 'node',
                 'claudia-local-api',
-                '--app-module',
-                appModule,
+                '--api-module',
+                apiModule,
                 '--port',
                 String(port)
             ];
@@ -286,7 +286,7 @@ describe('Unit tests for lib/index', function () {
                 expect(server).to.be.a('function');
                 expect(logger).to.be.a('object');
                 expect(claudiaApp).to.be.a('object');
-                expect(options.appModule).to.be.eql(appModule);
+                expect(options.apiModule).to.be.eql(apiModule);
                 expect(options.port).to.be.eql(String(port));
             };
 
@@ -297,19 +297,19 @@ describe('Unit tests for lib/index', function () {
 
         it('CASE 2: Should be able to set default value for port', function () {
             const runCmd = localApi.__get__('runCmd');
-            const appModule = 'test/claudia_app';
+            const apiModule = 'test/claudia_app';
             const port = 3000;
             process.argv = [
                 'node',
                 'claudia-local-api',
-                '--app-module',
-                appModule
+                '--api-module',
+                apiModule
             ];
             const bootstrap = function (server, logger, claudiaApp, options) {
                 expect(server).to.be.a('function');
                 expect(logger).to.be.a('object');
                 expect(claudiaApp).to.be.a('object');
-                expect(options.appModule).to.be.eql(appModule);
+                expect(options.apiModule).to.be.eql(apiModule);
                 expect(options.port).to.be.eql(port);
             };
 
