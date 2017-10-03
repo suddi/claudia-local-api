@@ -16,6 +16,7 @@
     "url": "https://github.com/suddi/claudia-local-api/issues"
   },
   "files": [
+    "bin",
     "lib"
   ],
   "main": "lib/index.js",
