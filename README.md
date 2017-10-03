@@ -7,7 +7,7 @@
 [![npm](https://img.shields.io/npm/dt/claudia-local-api.svg)](https://github.com/suddi/claudia-local-api)
 [![David](https://img.shields.io/david/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api)
 [![David](https://img.shields.io/david/dev/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api?type=dev)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/suddi/claudia-local-api)
+[![license](https://img.shields.io/github/license/suddi/claudia-local-api.svg)](https://github.com/suddi/claudia-local-api/blob/master/LICENSE)
 
 [![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graphs/commits.svg)](https://codecov.io/gh/suddi/claudia-local-api)
 
