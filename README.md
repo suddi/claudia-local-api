@@ -20,7 +20,7 @@ npm install --save-dev claudia-local-api
 To install globally:
 
 ````
-npm install -g claudia-local-api
+npm install --global claudia-local-api
 ````
 
 ## Usage
