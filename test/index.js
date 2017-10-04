@@ -336,7 +336,11 @@ describe('Integration tests for lib/index', function () {
         };
         const server = initServer();
 
-        bootstrap(server, logger, claudiaApp, options);
+        this.app = bootstrap(server, logger, claudiaApp, options);
+    });
+
+    after(function () {
+        this.app.close();
     });
 
     function makeRequest(params) {
