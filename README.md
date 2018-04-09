@@ -71,6 +71,12 @@ Or add into your `package.json`:
 
 This will start up a local Express server on port 3000 to proxy requests to your [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app.
 
+You can also pipe it into [`bunyan`](https://www.npmjs.com/package/bunyan) to pretty print the log:
+
+````
+claudia-local-api --api-module lib/app.js | bunyan --output short
+````
+
 ---
 
 For full list of options:
