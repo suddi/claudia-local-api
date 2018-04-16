@@ -93,7 +93,7 @@ describe('Unit tests for lib/index', function () {
                 }
             };
             const resourcePath = '/test/{id}';
-            const parsedPath = pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
+            const parsedPath = pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'));
             const routes = [
                 {
                     resourcePath,
@@ -185,7 +185,7 @@ describe('Unit tests for lib/index', function () {
                 }
             };
             const resourcePath = '/test/{id}';
-            const parsedPath = pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
+            const parsedPath = pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'));
             const routes = [
                 {
                     resourcePath,
