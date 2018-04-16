@@ -34,13 +34,25 @@ If you have a [`claudia`](https://www.npmjs.com/package/claudia) and [`claudia-a
 const ApiBuilder = require('claudia-api-builder');
 
 function handleGetRequest(app, req) {
-    return new app.ApiResponse('OK', {
+    const body = {
+        status: 'OK',
+        body: req.body,
+        pathParams: req.pathParams,
+        query: req.queryString
+    };
+    return new app.ApiResponse(body, {
         called: 'handleGetRequest'
     }, 200);
 }
 
 function handlePostRequest(app, req) {
-    return new app.ApiResponse('OK', {
+    const body = {
+        status: 'OK',
+        body: req.body,
+        pathParams: req.pathParams,
+        query: req.queryString
+    };
+    return new app.ApiResponse(body, {
         called: 'handlePostRequest'
     }, 201);
 }
@@ -51,10 +63,13 @@ function bootstrap() {
     app.get('/', handleGetRequest.bind(null, app));
     app.post('/', handlePostRequest.bind(null, app));
 
+    app.get('/users/{id}', handleGetRequest.bind(null, app));
+    app.get('/items/{itemId}/{partId}', handleGetRequest.bind(null, app));
+
+    app.post('/objects', handlePostRequest.bind(null, app));
+
     return app;
 }
-
-module.exports = bootstrap();
 ````
 
 You can install `claudia-local-api`  and run the command line Express API to test out the lambda function locally:
