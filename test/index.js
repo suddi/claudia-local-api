@@ -599,7 +599,8 @@ describe('Integration tests for lib/index', function () {
         const bootstrap = localApi.__get__('bootstrap');
         const getRoutes = localApi.__get__('getRoutes');
         const logger = {
-            info: spy
+            info: spy,
+            error: spy
         };
         const claudiaApp = require('./claudia_app');
         const routes = getRoutes(claudiaApp.apiConfig().routes);
@@ -794,7 +795,7 @@ describe('Integration tests for lib/index', function () {
                 expect(result).to.deep.eql(undefined);
             })
             .catch(function (err) {
-                expect(err.code).to.be.eql('ESOCKETTIMEDOUT');
+                expect(err.message).to.be.eql('Received statusCode = 500');
             });
     });
 });
