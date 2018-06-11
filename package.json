@@ -67,7 +67,7 @@
     "nsp": "^2.0.0",
     "request": "^2.83.0",
     "rewire": "^2.0 .0",
-    "sinon": "^5.0.0"
+    "sinon": "^6.0.0"
   },
   "eslintConfig": {
     "extends": "suddi/backend"
