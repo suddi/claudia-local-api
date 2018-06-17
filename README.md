@@ -70,6 +70,8 @@ function bootstrap() {
 
     return app;
 }
+
+module.exports = bootstrap()
 ````
 
 You can install `claudia-local-api`  and run the command line Express API to test out the lambda function locally:
