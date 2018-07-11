@@ -1,6 +1,8 @@
 'use strict';
 
 const ApiBuilder = require('claudia-api-builder');
+const fs = require('fs');
+const path = require('path');
 
 function handleGetRequest(app, req) {
     const body = {
@@ -26,6 +28,10 @@ function handlePostRequest(app, req) {
     }, 201);
 }
 
+function handleImageRequest() {
+    return fs.readFileSync(path.join(__dirname, 'img.png'));
+}
+
 function bootstrap() {
     const app = new ApiBuilder();
 
@@ -36,6 +42,14 @@ function bootstrap() {
     app.get('/items/{itemId}/{partId}', handleGetRequest.bind(null, app));
 
     app.post('/objects', handlePostRequest.bind(null, app));
+
+    app.get('/img', handleImageRequest, {
+        requestContentHandling: 'CONVERT_TO_TEXT',
+        success: {
+            contentType: 'image/png',
+            contentHandling: 'CONVERT_TO_BINARY'
+        }
+    });
 
     return app;
 }
