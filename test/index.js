@@ -43,6 +43,55 @@ describe('Unit tests for lib/index', function () {
             expect(spy.calledOnce).to.be.eql(true);
             expect(spy.calledWith(expectedResult)).to.be.eql(true);
         });
+
+        it('CASE 2: Should abbreviate bodies if abbrev is set', function () {
+            const logJson = localApi.__get__('logJson');
+            const spy = sinon.spy();
+            const logger = {
+                info: spy
+            };
+            logger.bodyAbbreviationLength = 11;
+
+            const body = {
+                body: 'OiPF7VcXwqydXKqIBUgucyu4I03zkqsIdAghlG8HmZiYgF6BPa'
+            };
+
+            const expected = {
+                body: 'OiPF7VcX...'
+            };
+
+            const expectedResult = JSON.stringify(expected, null, 4);
+
+            const result = logJson(logger, body);
+
+            expect(result).to.be.eq(undefined);
+            expect(spy.calledOnce).to.be.eql(true);
+            expect(spy.calledWith(expectedResult)).to.be.eql(true);
+        });
+
+        it('CASE 3: Abbreviate to nothing but ellipsis if very small', function () {
+            const logJson = localApi.__get__('logJson');
+            const spy = sinon.spy();
+            const logger = {
+                info: spy
+            };
+            logger.bodyAbbreviationLength = 0;
+            const body = {
+                body: 'OiPF7VcXwqydXKqIBUgucyu4I03zkqsIdAghlG8HmZiYgF6BPa'
+            };
+
+            const expected = {
+                body: '...'
+            };
+
+            const expectedResult = JSON.stringify(expected, null, 4);
+
+            const result = logJson(logger, body);
+
+            expect(result).to.be.eq(undefined);
+            expect(spy.calledOnce).to.be.eql(true);
+            expect(spy.calledWith(expectedResult)).to.be.eql(true);
+        });
     });
 
     context('Testing logError', function () {
@@ -544,13 +593,16 @@ describe('Unit tests for lib/index', function () {
             const runCmd = localApi.__get__('runCmd');
             const apiModule = 'test/claudia_app';
             const port = 3001;
+            const abbrev = 10;
             process.argv = [
                 'node',
                 'claudia-local-api',
                 '--api-module',
                 apiModule,
                 '--port',
-                String(port)
+                String(port),
+                '--abbrev',
+                abbrev
             ];
             const bootstrap = function (server, logger, claudiaApp, routes, options) {
                 expect(server).to.be.a('function');
@@ -558,6 +610,7 @@ describe('Unit tests for lib/index', function () {
                 expect(claudiaApp).to.be.a('object');
                 expect(options.apiModule).to.be.eql(apiModule);
                 expect(options.port).to.be.eql(String(port));
+                expect(options.abbrev).to.be.eql(abbrev);
             };
 
             const result = runCmd(bootstrap);
@@ -569,6 +622,7 @@ describe('Unit tests for lib/index', function () {
             const runCmd = localApi.__get__('runCmd');
             const apiModule = 'test/claudia_app';
             const port = 3000;
+            const abbrev = -1;
             process.argv = [
                 'node',
                 'claudia-local-api',
@@ -581,6 +635,7 @@ describe('Unit tests for lib/index', function () {
                 expect(claudiaApp).to.be.a('object');
                 expect(options.apiModule).to.be.eql(apiModule);
                 expect(options.port).to.be.eql(port);
+                expect(options.abbrev).to.be.eql(abbrev);
             };
 
             const result = runCmd(bootstrap);
