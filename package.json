@@ -61,7 +61,7 @@
     "claudia-api-builder": "^4.0.0",
     "eslint": "^4.0.0",
     "eslint-config-suddi": "^4.0.0",
-    "husky": "^0.14.0",
+    "husky": "^1.0.0",
     "istanbul": "^0.4.0",
     "mocha": "^5.0.0",
     "nsp": "^2.0.0",
