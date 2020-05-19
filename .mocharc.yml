@@ -1,0 +1,44 @@
+allow-uncaught: false
+async-only: false
+bail: false
+check-leaks: true
+color: true
+delay: false
+diff: true
+# Could be expressed as "no-exit: true"
+exit: false
+extension:
+  - js
+# fgrep and grep are mutually exclusive
+# fgrep: something
+# file: ''
+forbid-only: false
+forbid-pending: false
+full-trace: false
+global: []
+# fgrep and grep are mutually exclusive
+# grep: something
+growl: false
+ignore: []
+inline-diffs: false
+# Needs to be used with grep or fgrep
+# invert: false
+recursive: true
+reporter: spec
+reporter-option: []
+# require: ''
+retries: 0
+slow: 75
+sort: false
+# The positional arguments!
+spec: test
+# same as "no-timeout: true" or "timeout: 0"
+timeout: 5000
+# Node flags ok
+trace-warnings: true
+ui: bdd
+# V8 flags are prepended with "v8-"
+v8-stack-trace-limit: 100
+watch: false
+watch-files: []
+watch-ignore: []

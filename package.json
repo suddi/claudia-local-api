@@ -1,7 +1,7 @@
 {
   "name": "claudia-local-api",
   "description": "Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "homepage": "https://github.com/suddi/claudia-local-api",
   "author": {
     "name": "Sudharshan Ravindran",
@@ -35,41 +35,43 @@
     "dev-api"
   ],
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 2.0.0"
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
   },
   "bin": {
     "claudia-local-api": "bin/claudia-local-api"
   },
   "scripts": {
-    "check-coverage": "istanbul check-coverage",
-    "coverage": "istanbul cover _mocha -- --opts test/options/default.opts",
+    "coverage": "nyc mocha",
     "lint": "eslint .",
-    "prepush": "npm test",
-    "security-check": "nsp check --output summary",
-    "test": "npm run lint && npm run security-check && npm run coverage && npm run check-coverage"
+    "security-check": "npm audit --audit-level high || true",
+    "test": "npm run lint && npm run security-check && npm run coverage"
   },
   "dependencies": {
-    "body-parser": "^1.0.0",
-    "bunyan": "^1.0.0",
-    "commander": "^2.13.0",
-    "express": "^4.16.1",
-    "path-parser": "^4.0.4"
+    "body-parser": "^1.19.0",
+    "bunyan": "^1.8.12",
+    "commander": "^5.1.0",
+    "express": "^4.17.1",
+    "path-parser": "^6.1.0"
   },
   "devDependencies": {
-    "chai": "^4.0.0",
-    "claudia-api-builder": "^4.0.0",
-    "eslint": "^4.0.0",
-    "eslint-config-suddi": "^4.0.0",
-    "husky": "^0.14.0",
-    "istanbul": "^0.4.0",
-    "mocha": "^5.0.0",
-    "nsp": "^2.0.0",
-    "request": "^2.83.0",
-    "rewire": "^2.0 .0",
-    "sinon": "^5.0.0"
+    "chai": "^4.2.0",
+    "claudia-api-builder": "^4.1.2",
+    "eslint": "^6.8.0",
+    "eslint-config-suddi": "^5.0.2",
+    "husky": "^4.2.3",
+    "mocha": "^7.1.1",
+    "nyc": "^15.0.0",
+    "request": "^2.88.2",
+    "rewire": "^5.0.0",
+    "sinon": "^9.0.1"
   },
   "eslintConfig": {
     "extends": "suddi/backend"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm test"
+    }
   }
 }
