@@ -403,7 +403,9 @@ describe('Unit tests for lib/index', function () {
                 },
 
                 send: function (body) {
-                    expect(body).to.be.instanceof(Buffer);
+                    if (body) {
+                        expect(body).to.be.instanceof(Buffer);
+                    }
                     return this;
                 }
             };
@@ -492,6 +494,23 @@ describe('Unit tests for lib/index', function () {
                 body: 'asdjlaasdfiuaslfuaweliuasldifudif'
             };
             const res = getBinaryRes(response.headers, response.statusCode, response.body);
+            const expectedResult = JSON.stringify(response, null, 4);
+
+            const handleResponse = makeHandleResponse(logger, res, 'CONVERT_TO_BINARY');
+            handleResponse(null, response);
+
+            expect(spy.calledOnce).to.be.eql(true);
+            expect(spy.calledWith(expectedResult)).to.be.eql(true);
+        });
+
+        it('CASE 5: Should handle binary data when response is broken', function () {
+            const makeHandleResponse = localApi.__get__('makeHandleResponse');
+            const spy = sinon.spy();
+            const logger = {
+                info: spy
+            };
+            const response = {};
+            const res = getBinaryRes({}, 200);
             const expectedResult = JSON.stringify(response, null, 4);
 
             const handleResponse = makeHandleResponse(logger, res, 'CONVERT_TO_BINARY');
@@ -951,6 +970,22 @@ describe('Integration tests for lib/index', function () {
             })
             .catch(function (err) {
                 expect(err.message).to.be.eql('Received statusCode = 500');
+            });
+    });
+
+    it('CASE 8: Should be able to render binary', function () {
+        const params = {
+            url: `http://localhost:${port}/img`,
+            method: 'GET',
+            timeout: 200
+        };
+        return makeRequest(params)
+            .then(function (result) {
+                const headers = result.headers;
+                const body = result.body;
+
+                expect(headers.statusCode).to.be.eql(200);
+                expect(headers.headers['content-type']).to.be.eql('image/png');
             });
     });
 });
