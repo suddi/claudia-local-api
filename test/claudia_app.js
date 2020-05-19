@@ -28,6 +28,18 @@ function handlePostRequest(app, req) {
     }, 201);
 }
 
+function handleFormUrlEncodedRequest(app, req) {
+    const body = {
+        status: 'OK',
+        body: req.body,
+        pathParams: req.pathParams,
+        query: req.queryString
+    };
+    return new app.ApiResponse(body, {
+        called: 'handleFormUrlEncodedRequest'
+    }, 200);
+}
+
 function handleImageRequest() {
     return fs.readFileSync(path.join(__dirname, 'img.png'));
 }
@@ -42,6 +54,8 @@ function bootstrap() {
     app.get('/items/{itemId}/{partId}', handleGetRequest.bind(null, app));
 
     app.post('/objects', handlePostRequest.bind(null, app));
+
+    app.post('/items', handleFormUrlEncodedRequest.bind(null, app));
 
     app.get('/img', handleImageRequest, {
         requestContentHandling: 'CONVERT_TO_TEXT',

@@ -102,12 +102,14 @@ describe('Unit tests for lib/index', function () {
                 error: spy
             };
             const error = new Error('Fail!');
+            const expectedMessage = error.message;
             const expectedResult = error.stack;
 
             const result = logError(logger, error);
 
             expect(result).to.be.eq(undefined);
-            expect(spy.calledOnce).to.be.eql(true);
+            expect(spy.calledTwice).to.be.eql(true);
+            expect(spy.calledWith(expectedMessage)).to.be.eql(true);
             expect(spy.calledWith(expectedResult)).to.be.eql(true);
         });
     });
@@ -470,12 +472,14 @@ describe('Unit tests for lib/index', function () {
             const res = getRes({}, 500, {
                 message: error.message
             });
+            const expectedMessage = error.message;
             const expectedResult = error.stack;
 
             const handleResponse = makeHandleResponse(logger, res);
             handleResponse(error, {});
 
-            expect(spy.calledOnce).to.be.eql(true);
+            expect(spy.calledTwice).to.be.eql(true);
+            expect(spy.calledWith(expectedMessage)).to.be.eql(true);
             expect(spy.calledWith(expectedResult)).to.be.eql(true);
         });
 
@@ -985,6 +989,36 @@ describe('Integration tests for lib/index', function () {
 
                 expect(headers.statusCode).to.be.eql(200);
                 expect(headers.headers['content-type']).to.be.eql('image/png');
+            });
+    });
+
+    it('CASE 9: Should handle application/x-www-form-urlencoded requests', function () {
+        const inputBody = {
+            foo: 'bar',
+            baz: 45
+        };
+        const params = {
+            url: `http://localhost:${port}/items`,
+            method: 'POST',
+            form: inputBody,
+            timeout: 200
+        };
+        return makeRequest(params)
+            .then(function (result) {
+                const headers = result.headers;
+                const body = result.body;
+
+                expect(headers.statusCode).to.be.eql(200);
+                expect(headers.headers.called).to.be.eql('handleFormUrlEncodedRequest');
+                expect(body).to.be.eql(JSON.stringify({
+                    status: 'OK',
+                    body: {
+                        foo: inputBody.foo,
+                        baz: inputBody.baz.toString()
+                    },
+                    pathParams: {},
+                    query: {}
+                }));
             });
     });
 });
