@@ -982,7 +982,6 @@ describe('Integration tests for lib/index', function () {
         return makeRequest(params)
             .then(function (result) {
                 const headers = result.headers;
-                const body = result.body;
 
                 expect(headers.statusCode).to.be.eql(200);
                 expect(headers.headers['content-type']).to.be.eql('image/png');
