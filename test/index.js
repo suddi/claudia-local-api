@@ -15,7 +15,7 @@ describe('Unit tests for lib/index', function () {
 
             const result = getDefaultConfig();
 
-            expect(result).to.have.keys('port');
+            expect(result).to.have.keys('port', 'lamdaVersion');
         });
     });
 
@@ -414,35 +414,43 @@ describe('Unit tests for lib/index', function () {
         }
 
         it('CASE 1: Should handle successful response', function () {
-            const makeHandleResponse = localApi.__get__('makeHandleResponse');
-            const spy = sinon.spy();
-            const logger = {
-                info: spy
-            };
-            const response = {
-                headers: {
-                    'content-type': 'application/json',
-                    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-                },
-                statusCode: 201,
-                body: {
-                    a: {
-                        b: {
-                            c: [1, 2, 3],
-                            d: 42
-                        }
+            try{
+                const makeHandleResponse = localApi.__get__('makeHandleResponse');
+                const spy = sinon.spy();
+                const logger = {
+                    info: spy
+                };
+                const response = {
+                    env:{
+                        lambdaVersion:'develop'
                     },
-                    e: 42
-                }
-            };
-            const res = getRes(response.headers, response.statusCode, response.body);
-            const expectedResult = JSON.stringify(response, null, 4);
+                    headers: {
+                        'content-type': 'application/json',
+                        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+                    },
+                    statusCode: 201,
+                    body: {
+                        a: {
+                            b: {
+                                c: [1, 2, 3],
+                                d: 42
+                            }
+                        },
+                        e: 42
+                    }
+                };
+                const res = getRes(response.headers, response.statusCode, response.body);
+                const expectedResult = JSON.stringify(response, null, 4);
 
-            const handleResponse = makeHandleResponse(logger, res);
-            handleResponse(null, response);
+                const handleResponse = makeHandleResponse(logger, res);
+                handleResponse(null, response);
 
-            expect(spy.calledOnce).to.be.eql(true);
-            expect(spy.calledWith(expectedResult)).to.be.eql(true);
+                expect(spy.calledOnce).to.be.eql(true);
+                expect(spy.calledWith(expectedResult)).to.be.eql(true);
+            }catch(e){
+                console.error(e);
+                expect(true).toBe(false);
+            }
         });
 
         it('CASE 2: Should handle successful response with default values', function () {
@@ -759,6 +767,35 @@ describe('Unit tests for lib/index', function () {
                 expect(options.apiModule).to.be.eql(apiModule);
                 expect(options.port).to.be.eql(port);
                 expect(options.abbrev).to.be.eql(abbrev);
+            };
+
+            const result = runCmd(bootstrap);
+
+            expect(result).to.be.eql(undefined);
+        });
+
+        it('CASE 3: Should be able to set lambdaVersion', function () {
+            const runCmd = localApi.__get__('runCmd');
+            const apiModule = 'test/claudia_app';
+            const port = 3000;
+            const abbrev = -1;
+            const lambdaVersion = 'develop';
+            process.argv = [
+                'node',
+                'claudia-local-api',
+                '--api-module',
+                apiModule,
+                '--lambdaVersion',
+                'develop'
+            ];
+            const bootstrap = function (server, logger, claudiaApp, routes, options) {
+                expect(server).to.be.a('function');
+                expect(logger).to.be.a('object');
+                expect(claudiaApp).to.be.a('object');
+                expect(options.apiModule).to.be.eql(apiModule);
+                expect(options.port).to.be.eql(port);
+                expect(options.abbrev).to.be.eql(abbrev);
+                expect(options.lambdaVersion).to.be.eql(lambdaVersion);
             };
 
             const result = runCmd(bootstrap);
