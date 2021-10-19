@@ -1,17 +1,8 @@
-# claudia-local-api
+# claudia-local-api-with-stage
 
-[![CircleCI](https://circleci.com/gh/suddi/claudia-local-api.svg?style=svg)](https://circleci.com/gh/suddi/claudia-local-api)
-[![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graph/badge.svg)](https://codecov.io/gh/suddi/claudia-local-api)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4aaafdcb86574c709f856f2e00d3a809)](https://www.codacy.com/app/Suddi/claudia-local-api)
-[![npm](https://img.shields.io/npm/v/claudia-local-api.svg)](https://www.npmjs.com/package/claudia-local-api)
-[![npm](https://img.shields.io/npm/dt/claudia-local-api.svg)](https://www.npmjs.com/package/claudia-local-api)
-[![David](https://img.shields.io/david/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api)
-[![David](https://img.shields.io/david/dev/suddi/claudia-local-api.svg)](https://david-dm.org/suddi/claudia-local-api?type=dev)
-[![license](https://img.shields.io/github/license/suddi/claudia-local-api.svg)](https://github.com/suddi/claudia-local-api/blob/master/LICENSE)
 
-[![codecov](https://codecov.io/gh/suddi/claudia-local-api/branch/master/graphs/commits.svg)](https://codecov.io/gh/suddi/claudia-local-api)
 
-Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment
+Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment (Based on Sudharshan Ravindran claudia-local-api) with the aws lambda function stage parameter. BE AWARE NOT INSTALL WITH claudia-local-api package!
 
 ````
 npm install --save-dev claudia-local-api
@@ -82,7 +73,7 @@ claudia-local-api --api-module lib/app.js
 Or add into your `package.json`:
 
 ````json
-"server": "claudia-local-api --api-module lib/app.js"
+"server": "claudia-local-api --api-module lib/app.js --stage develop"
 ````
 
 This will start up a local Express server on port 3000 to proxy requests to your [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app.
@@ -90,7 +81,7 @@ This will start up a local Express server on port 3000 to proxy requests to your
 You can also pipe it into [`bunyan`](https://www.npmjs.com/package/bunyan) to pretty print the log:
 
 ````
-claudia-local-api --api-module lib/app.js | bunyan --output short
+claudia-local-api --api-module lib/app.js --stage develop | bunyan --output short
 ````
 
 ---

@@ -1,7 +1,7 @@
 {
-  "name": "claudia-local-api-with-lambda-version",
+  "name": "claudia-local-api-with-stage",
   "description": "Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment (BASED on Sudharshan Ravindran claudia-local-api )",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "homepage": "https://github.com/fabianobonomini/claudia-local-api",
   "author": {
     "name": "Sudharshan Ravindran",
