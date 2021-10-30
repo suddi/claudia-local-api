@@ -15,7 +15,7 @@ describe('Unit tests for lib/index', function () {
 
             const result = getDefaultConfig();
 
-            expect(result).to.have.keys('port', 'lamdaVersion');
+            expect(result).to.have.keys('port', 'lambdaVersion');
         });
     });
 
@@ -262,61 +262,76 @@ describe('Unit tests for lib/index', function () {
 
     context('Testing getParams', function () {
         it('CASE 1: Should make claudia-api-builder request params as expected', function () {
-            const getParams = localApi.__get__('getParams');
-            const params = {
-                id: '42'
-            };
-            const req = {
-                originalUrl: `http://www.example.com/test/${params.id}?test-value=42`,
-                _parsedUrl: {
-                    pathname: `/test/${params.id}`
-                },
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json',
-                    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-                },
-                query: {
-                    'test-value': '42'
-                },
-                body: {
-                    a: {
-                        b: {
-                            c: [1, 2, 3],
-                            d: 42
-                        }
+            try{           
+                const getParams = localApi.__get__('getParams');
+                const params = {
+                    id: '42'
+                };
+                const req = {
+                    originalUrl: `http://www.example.com/test/${params.id}?test-value=42`,
+                    _parsedUrl: {
+                        pathname: `/test/${params.id}`
                     },
-                    e: 42
-                }
-            };
-            const resourcePath = '/test/{id}';
-            const routes = [
-                {
-                    resourcePath,
-                    supportedMethods: [
-                        'GET',
-                        'POST',
-                        'PUT',
-                        'PATCH',
-                        'DELETE'
-                    ],
-                    path: pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
-                }
-            ];
-            const expectedResult = {
-                requestContext: {
-                    resourcePath: resourcePath,
-                    httpMethod: req.method
-                },
-                headers: req.headers,
-                queryStringParameters: req.query,
-                body: req.body,
-                pathParameters: params
-            };
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json',
+                        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+                    },
+                    query: {
+                        'test-value': '42'
+                    },
+                    body: {
+                        a: {
+                            b: {
+                                c: [1, 2, 3],
+                                d: 42
+                            }
+                        },
+                        e: 42
+                    }
+                };
+                const resourcePath = '/test/{id}';
+                const routes = [
+                    {
+                        resourcePath,
+                        supportedMethods: [
+                            'GET',
+                            'POST',
+                            'PUT',
+                            'PATCH',
+                            'DELETE',
+                            'OPTIONS'
+                        ],
+                        path: pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
+                    }
+                ];
+                const expectedResult = {
+                    requestContext: {
+                        resourcePath: resourcePath,
+                        httpMethod: req.method
+                    },
+                    headers: req.headers,
+                    queryStringParameters: req.query,
+                    body: req.body,
+                    pathParameters: params
+                };
 
-            const result = getParams(req, routes);
+                const result = getParams(req, routes);
 
-            expect(result).to.deep.eql(expectedResult);
+                expect(expectedResult.requestContext.resourcePath).eql(result.requestContext.resourcePath);
+                expect(expectedResult.requestContext.httpMethod).eql(result.requestContext.httpMethod);
+                expect(typeof result.requestContext.resourceId).eql('string');
+                expect(expectedResult.headers).eql(result.headers);
+                expect(expectedResult.queryStringParameters).eql(result.queryStringParameters);
+                expect(expectedResult.body).eql(result.body);
+                expect(expectedResult.pathParameters).eql(result.pathParameters);
+
+
+                //expect(result).to.deep.eql(expectedResult);
+            }catch(e){
+                console.error(e);
+                expect(true).toBe(false);
+            }
         });
     });
 
@@ -535,78 +550,92 @@ describe('Unit tests for lib/index', function () {
 
     context('Testing makeHandleRequest', function () {
         it('CASE 1: Should handle request correctly', function () {
-            const makeHandleRequest = localApi.__get__('makeHandleRequest');
-            const spy = sinon.spy();
-            const logger = {
-                info: spy
-            };
-            const params = {
-                id: '23423'
-            };
-            const req = {
-                originalUrl: `http://www.example.com/test/${params.id}?test-value=42`,
-                _parsedUrl: {
-                    pathname: `/test/${params.id}`
-                },
-                method: 'PATCH',
-                headers: {
-                    'content-type': 'application/json',
-                    'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
-                },
-                query: {
-                    'test-value': '42'
-                },
-                body: {
-                    a: {
-                        b: {
-                            c: [1, 2, 3],
-                            d: 42
-                        }
+
+            try{            
+                const makeHandleRequest = localApi.__get__('makeHandleRequest');
+                const spy = sinon.spy();
+                const logger = {
+                    info: spy
+                };
+                const params = {
+                    id: '23423'
+                };
+                const req = {
+                    originalUrl: `http://www.example.com/test/${params.id}?test-value=42`,
+                    _parsedUrl: {
+                        pathname: `/test/${params.id}`
                     },
-                    e: 42
-                }
-            };
-            const resourcePath = '/test/{id}';
-            const routes = [
-                {
-                    resourcePath,
-                    supportedMethods: [
-                        'GET',
-                        'POST',
-                        'PUT',
-                        'PATCH',
-                        'DELETE'
-                    ],
-                    path: pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
-                }
-            ];
-            const expectedParams = {
-                requestContext: {
-                    resourcePath: resourcePath,
-                    httpMethod: req.method
-                },
-                headers: req.headers,
-                queryStringParameters: req.query,
-                body: req.body,
-                pathParameters: params
-            };
-            const app = {
-                proxyRouter: function (receivedParams, controlFlow) {
-                    expect(receivedParams).to.deep.eql(expectedParams);
-                    expect(controlFlow).to.have.keys('done');
-                    expect(controlFlow.done).to.be.a('function');
-                },
-                apiConfig: function () {
-                    return {
-                        message: 'This function exists so that the rest of this test does not fail.'
-                    };
-                }
-            };
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json',
+                        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36'
+                    },
+                    query: {
+                        'test-value': '42'
+                    },
+                    body: {
+                        a: {
+                            b: {
+                                c: [1, 2, 3],
+                                d: 42
+                            }
+                        },
+                        e: 42
+                    }
+                };
+                const resourcePath = '/test/{id}';
+                const routes = [
+                    {
+                        resourcePath,
+                        supportedMethods: [
+                            'GET',
+                            'POST',
+                            'PUT',
+                            'PATCH',
+                            'DELETE'
+                        ],
+                        path: pathParser.Path.createPath(resourcePath.replace(/{(.+?)}/g, ':$1'))
+                    }
+                ];
+                const expectedParams = {
+                    requestContext: {
+                        resourcePath: resourcePath,
+                        httpMethod: req.method
+                    },
+                    headers: req.headers,
+                    queryStringParameters: req.query,
+                    body: req.body,
+                    pathParameters: params
+                };
+                const app = {
+                    proxyRouter: function (receivedParams, controlFlow) {
+                        //expect(receivedParams).to.deep.eql(expectedParams);
+                        expect(expectedParams.requestContext.resourcePath).eql(receivedParams.requestContext.resourcePath);
+                        expect(expectedParams.requestContext.httpMethod).eql(receivedParams.requestContext.httpMethod);
+                        expect(typeof receivedParams.requestContext.resourceId).eql('string');
+                        expect(expectedParams.headers).eql(receivedParams.headers);
+                        expect(expectedParams.queryStringParameters).eql(receivedParams.queryStringParameters);
+                        expect(expectedParams.body).eql(receivedParams.body);
+                        expect(expectedParams.pathParameters).eql(receivedParams.pathParameters);
+                        expect(controlFlow).to.have.keys('done');
+                        expect(controlFlow.done).to.be.a('function');
+                    },
+                    apiConfig: function () {
+                        return {
+                            message: 'This function exists so that the rest of this test does not fail.'
+                        };
+                    }
+                };
 
-            const handleRequest = makeHandleRequest(logger, app, routes);
-            const result = handleRequest(req, {});
+                const handleRequest = makeHandleRequest(logger, app, routes);
+                const result = handleRequest(req, {});
 
-            expect(result).to.be.eql(undefined);
+                expect(result).to.be.eql(undefined);
+
+            }catch(e){
+                console.error(e);
+                expect(true).eql(false);
+            }
         });
     });
 
