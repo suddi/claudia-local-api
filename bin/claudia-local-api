@@ -5,7 +5,7 @@ const path = require('path');
 
 function execute() {
     const potentialPaths = [
-        path.join(process.cwd(), 'node_modules/claudia-local-api/lib'),
+        path.join(process.cwd(), 'node_modules/claudia-local-api-with-lambda-version/lib'),
         path.join(__dirname, '../lib')
     ];
 
@@ -16,7 +16,7 @@ function execute() {
     if (!existingPaths.length) {
         throw new Error('claudia-local-api not found, is it installed correctly?');
     }
-
+    
     const program = require(existingPaths[0]);
     program.run();
 }
