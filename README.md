@@ -1,4 +1,4 @@
-# ts-ts-claudia-local-api
+# ts-claudia-local-api
 
 Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment (Based on Sudharshan Ravindran claudia-local-api) with the aws lambda function stage parameter. BE AWARE NOT INSTALL WITH claudia-local-api package!
 Extends claudia-local-api with suport for AWS requestUUID and stages using --stage {stagename} provided as commandline argument
