@@ -1,19 +1,19 @@
 {
-  "name": "claudia-local-api-with-stage",
+  "name": "ts-claudia-local-api",
   "description": "Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment (BASED on Sudharshan Ravindran claudia-local-api )",
-  "version": "3.3.0",
-  "homepage": "https://github.com/fabianobonomini/claudia-local-api",
+  "version": "1.0.1",
+  "homepage": "https://github.com/TantosvagoRepos/ts-claudia-local-api",
   "author": {
-    "name": "Sudharshan Ravindran",
-    "email": "mail@suddi.io",
-    "url": "https://suddi.io"
+    "name": "TantosvagoTeam",
+    "email": "it@tantosvago.it",
+    "url": "https://github.com/TantosvagoRepos"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fabianobonomini/claudia-local-api"
+    "url": "https://github.com/TantosvagoRepos/ts-claudia-local-api"
   },
   "bugs": {
-    "url": "https://github.com/fabianobonomini/claudia-local-api/issues"
+    "url": "https://github.com/TantosvagoRepos/ts-claudia-local-api/issues"
   },
   "files": [
     "bin",

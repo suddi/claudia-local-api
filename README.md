@@ -1,17 +1,17 @@
-# claudia-local-api-with-stage
-
-
+# ts-ts-claudia-local-api
 
 Command line utility to launch Express local API for claudia-api-builder. Test drive your lambda functions before deployment (Based on Sudharshan Ravindran claudia-local-api) with the aws lambda function stage parameter. BE AWARE NOT INSTALL WITH claudia-local-api package!
+Extends claudia-local-api with suport for AWS requestUUID and stages using --stage {stagename} provided as commandline argument
+
 
 ````
-npm install --save-dev claudia-local-api
+npm install --save-dev ts-claudia-local-api
 ````
 
 To install globally:
 
 ````
-npm install --global claudia-local-api
+npm install --global ts-claudia-local-api
 ````
 
 ## Usage
@@ -64,16 +64,16 @@ function bootstrap() {
 module.exports = bootstrap()
 ````
 
-You can install `claudia-local-api`  and run the command line Express API to test out the lambda function locally:
+You can install `ts-claudia-local-api`  and run the command line Express API to test out the lambda function locally:
 
 ````
-claudia-local-api --api-module lib/app.js
+ts-claudia-local-api --api-module lib/app.js
 ````
 
 Or add into your `package.json`:
 
 ````json
-"server": "claudia-local-api --api-module lib/app.js --stage develop"
+"server": "ts-claudia-local-api --api-module lib/app.js --stage develop"
 ````
 
 This will start up a local Express server on port 3000 to proxy requests to your [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app.
@@ -81,7 +81,7 @@ This will start up a local Express server on port 3000 to proxy requests to your
 You can also pipe it into [`bunyan`](https://www.npmjs.com/package/bunyan) to pretty print the log:
 
 ````
-claudia-local-api --api-module lib/app.js --stage develop | bunyan --output short
+ts-claudia-local-api --api-module lib/app.js --stage develop | bunyan --output short
 ````
 
 ---
@@ -89,5 +89,5 @@ claudia-local-api --api-module lib/app.js --stage develop | bunyan --output shor
 For full list of options:
 
 ````
-claudia-local-api --help
+ts-claudia-local-api --help
 ````
