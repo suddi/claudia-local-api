@@ -67,13 +67,13 @@ module.exports = bootstrap()
 You can install `ts-claudia-local-api`  and run the command line Express API to test out the lambda function locally:
 
 ````
-ts-claudia-local-api --api-module lib/app.js
+claudia-local-api --api-module app.js
 ````
 
 Or add into your `package.json`:
 
 ````json
-"server": "ts-claudia-local-api --api-module lib/app.js --stage develop"
+"server": "claudia-local-api --api-module app.js --stage develop"
 ````
 
 This will start up a local Express server on port 3000 to proxy requests to your [`claudia-api-builder`](https://www.npmjs.com/package/claudia-api-builder) app.
@@ -81,7 +81,7 @@ This will start up a local Express server on port 3000 to proxy requests to your
 You can also pipe it into [`bunyan`](https://www.npmjs.com/package/bunyan) to pretty print the log:
 
 ````
-ts-claudia-local-api --api-module lib/app.js --stage develop | bunyan --output short
+claudia-local-api --api-module app.js --stage develop | bunyan --output short
 ````
 
 ---
@@ -89,5 +89,5 @@ ts-claudia-local-api --api-module lib/app.js --stage develop | bunyan --output s
 For full list of options:
 
 ````
-ts-claudia-local-api --help
+claudia-local-api --help
 ````
